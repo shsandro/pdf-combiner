@@ -1,0 +1,40 @@
+{
+  "name": "pdf-combiner",
+  "version": "0.1.0",
+  "description": "Merge several PDFs (buffers, file paths or URLs) into a single PDF",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test --experimental-strip-types test/*.test.ts",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "pdf",
+    "merge",
+    "combine",
+    "pdf-lib"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "pdf-lib": "^1.17.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "5.8.3"
+  }
+}
