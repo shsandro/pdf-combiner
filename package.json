@@ -1,14 +1,33 @@
 {
   "name": "pdf-combiner",
   "version": "0.1.0",
-  "description": "Merge several PDFs (buffers, file paths or URLs) into a single PDF",
+  "description": "Merge several PDFs (buffers, files, file paths or URLs) into a single PDF, in Node or the browser",
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/node.js",
+  "types": "./dist/node.d.ts",
+  "browser": "./dist/browser.js",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "browser": {
+        "types": "./dist/browser.d.ts",
+        "default": "./dist/browser.js"
+      },
+      "node": {
+        "types": "./dist/node.d.ts",
+        "default": "./dist/node.js"
+      },
+      "default": {
+        "types": "./dist/browser.d.ts",
+        "default": "./dist/browser.js"
+      }
+    },
+    "./browser": {
+      "types": "./dist/browser.d.ts",
+      "default": "./dist/browser.js"
+    },
+    "./node": {
+      "types": "./dist/node.d.ts",
+      "default": "./dist/node.js"
     }
   },
   "files": [

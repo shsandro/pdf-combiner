@@ -3,8 +3,9 @@ import assert from "node:assert/strict";
 import { mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { pathToFileURL } from "node:url";
 import { PDFDocument } from "pdf-lib";
-import { mergePdfs, mergePdfsToFile } from "../src/index.ts";
+import { mergePdfs, mergePdfsToFile } from "../src/node.ts";
 
 async function makePdf(pageCount: number, width: number): Promise<Uint8Array> {
   const doc = await PDFDocument.create();
@@ -27,6 +28,13 @@ test("reads file paths and writes the output file", async () => {
   await writeFile(a, await makePdf(1, 300));
   await mergePdfsToFile([a, (await makePdf(1, 400)).buffer as ArrayBuffer], out);
   assert.deepEqual(await pageWidths(await readFile(out)), [300, 400]);
+});
+
+test("reads file: URLs from disk", async () => {
+  const dir = await mkdtemp(join(tmpdir(), "pdf-combiner-"));
+  const a = join(dir, "a.pdf");
+  await writeFile(a, await makePdf(1, 500));
+  assert.deepEqual(await pageWidths(await mergePdfs([pathToFileURL(a)])), [500]);
 });
 
 test("rejects when a source is not a PDF", async () => {
