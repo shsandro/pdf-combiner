@@ -2,13 +2,10 @@
 
 Merge several PDFs into a single PDF, keeping the input order. Built on [pdf-lib](https://pdf-lib.js.org/).
 
-Extracted from the "Combine Vouchers" feature of db3-app.
-
 ## Install
 
 ```bash
-npm install
-npm run build
+npm install pdf-combiner
 ```
 
 Works in Node.js 18+ and in browsers. Bundlers pick the right build automatically through the `browser` / `node` export conditions. You can also import `pdf-combiner/browser` or `pdf-combiner/node` explicitly.
@@ -73,6 +70,8 @@ Browser only:
 ## Development
 
 ```bash
-npm test        # node:test, runs the TS sources directly
+npm install
+npm test          # node:test, runs the TS sources directly (Node 22.6+)
 npm run typecheck
+npm run build
 ```
